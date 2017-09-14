@@ -164,7 +164,7 @@ void MovPkt2Dec(Receiver *rx)
             if (decwrapper->id < id) {
                 if (decwrapper->HasRecvedNxtBatchPkts == false) {
                     decwrapper->HasRecvedNxtBatchPkts = true;
-                    int threshold = max(((int)rx->N - (int)rx->F), 0);
+                    int threshold = min(max(((int)rx->N - (int)rx->F), 0), (int)rx->maxsymbol);
                     debug("N: %u, Fold: %u\n", rx->N, rx->F);
                     debug("NRecvedPkts: %u, threshold: %u\n", decwrapper->NRecvedPkts, threshold);
                     if ((int)decwrapper->NRecvedPkts < threshold) {
@@ -195,7 +195,7 @@ void MovPkt2Dec(Receiver *rx)
                     free(cpkt->pkt);
                     free(cpkt);
 
-                    int threshold = max(((int)rx->N - (int)rx->F), 0);
+                    int threshold = min(max(((int)rx->N - (int)rx->F), 0), (int)rx->maxsymbol);
                     if (decwrapper->NRecvedPkts >= threshold && !decwrapper->SentPrimaryACK) {
                         decwrapper->SentPrimaryACK = true;
                         AckMsg msg = {id, PrimaryACK};
