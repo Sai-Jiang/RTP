@@ -187,7 +187,8 @@ void MovPkt2Dec(Receiver *rx)
                     nxt = p->next;
                     ChainedPkt *cpkt = iqueue_entry(p, ChainedPkt, qnode);
 
-                    kodoc_read_payload(decwrapper->dec, cpkt->pkt->data);
+                    if (!kodoc_is_complete(decwrapper->dec))
+                        kodoc_read_payload(decwrapper->dec, cpkt->pkt->data);
                     decwrapper->NRecvedPkts++;
 
                     npkts--;
