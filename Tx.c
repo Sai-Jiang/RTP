@@ -179,6 +179,9 @@ int main()
         MoveSrc2Enc(tx);
         CheckACK(tx);
         Fountain(tx);
+
+        usleep(50); // limit the fountain rate
+        
     } while (!iqueue_is_empty(&tx->src_queue) || !iqueue_is_empty(&tx->enc_queue));
 
     free(blk);
