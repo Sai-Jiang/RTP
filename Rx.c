@@ -18,7 +18,7 @@ Receiver * Receiver_Init(int maxsymbols, int maxsymbolsize)
     iqueue_init(&rx->pkt_queue);
     rx->FinalACKedNUpdatedF = 0;
 
-    rx->N = (uint32_t )(maxsymbols);
+    rx->N = (uint32_t )(maxsymbols * (1 + EXTRAPERCENT));
     rx->F = rx->N / 2;
 
     iqueue_init(&rx->dec_queue);

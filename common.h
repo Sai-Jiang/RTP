@@ -42,6 +42,8 @@
 
 #define LOOPCNT         (2000)
 
+#define EXTRAPERCENT    (0.02)
+
 // Original Data Wrapper-related Begin
 typedef struct {
     iqueue_head qnode;
